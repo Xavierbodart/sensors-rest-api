@@ -7,10 +7,9 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      mysqldb:
-        condition: service_healthy
+        - mysqldb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/sensormonitoring
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/sensormonitoring
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: admin
       SIGNAL_FILE_PATH: C:/coding_challenge/data/signals.csv
@@ -21,10 +20,8 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_DATABASE: sensormonitoring
-      MYSQL_USER: root
-      MYSQL_PASSWORD: admin
-      MYSQL_ROOT_PASSWORD: admin
+      - MYSQL_DATABASE=sensormonitoring
+      - MYSQL_ROOT_PASSWORD=admin
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
