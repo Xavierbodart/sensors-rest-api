@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(schema = "sensormonitoring", name = "KEYWORDS")
+@Table(name = "KEYWORDS")
 @Data
 public class KeywordEntity {
 

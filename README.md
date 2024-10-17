@@ -1,3 +1,21 @@
+# Sensor Monitoring Application
+
+## Description
+
+This application is designed for monitoring sensors related to proton therapy. It includes functionality to manage
+signals and associated keywords using a MySQL database.
+Signals data are located in /signals-data/signals.csv and can be loaded via the `/signals/load-triggers` endpoint.
+
+## Prerequisites
+
+- [Docker](https://www.docker.com/get-started)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+## Setting Up the Database
+
+The application initializes a MySQL database and creates the required tables using the `/script.init.sql` script located
+in the `/docker-entrypoint-initdb.d` directory.
+
 # API Documentation
 
 ## Overview
@@ -48,8 +66,9 @@ Only `deadbandType`, `deadbandValue` and `samplingInterval` fields will be updat
 
 **POST** `/signals/load-triggers`
 
-Loads trigger data from into the system. 
-It will read the file from the path defined with `signal.file.path` application property and load data in `SIGNAL_MONITORING` database.
+Loads trigger data from into the system.
+It will read the file from the path defined with `signal.file.path` application property and load data in
+`SIGNAL_MONITORING` database.
 
 **Responses:**
 

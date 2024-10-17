@@ -7,16 +7,20 @@ services:
     ports:
       - 8080:8080
     depends_on:
-        - mysqldb
+      - mysqldb
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/sensormonitoring
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: admin
-      SIGNAL_FILE_PATH: C:/coding_challenge/data/signals.csv
+      SIGNAL_FILE_PATH: /signals-data/signals.csv
+    volumes:
+      - ./signals-data:/signals-data
     networks:
       - springboot-mysql-network
   mysqldb:
     image: mysql:8.0.34
+#    command:
+#      - mysql -u root -padmin < docker-entrypoint-initdb.d/init.sql
     ports:
       - 3306:3306
     environment:
@@ -24,6 +28,7 @@ services:
       - MYSQL_ROOT_PASSWORD=admin
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - springboot-mysql-network
 volumes:

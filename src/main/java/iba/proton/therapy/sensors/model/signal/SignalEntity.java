@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(schema = "sensormonitoring", name = "SIGNALS")
+@Table(name = "SIGNALS")
 @Data
 public class SignalEntity {
 
