@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/sensormonitoring
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
+      SIGNAL_FILE_PATH: C:/coding_challenge/data/signals.csv
+    networks:
+      - springboot-mysql-network
+  mysqldb:
+    image: mysql:8.0.34
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: sensormonitoring
+      MYSQL_USER: root
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - springboot-mysql-network
+volumes:
+  mysql-data:
+networks:
+  springboot-mysql-network:
+    name: springboot-mysql-network
