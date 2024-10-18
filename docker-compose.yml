@@ -19,8 +19,6 @@ services:
       - springboot-mysql-network
   mysqldb:
     image: mysql:8.0.34
-#    command:
-#      - mysql -u root -padmin < docker-entrypoint-initdb.d/init.sql
     ports:
       - 3306:3306
     environment:
