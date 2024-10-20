@@ -14,8 +14,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public abstract class SignalLoadMapper {
 
-    @Mapping(source = "signalLoadMapper.signalEntities", target = "successRowsLoadCount", qualifiedByName =
-            "getSuccessRowsLoadCount")
+    @Mapping(source = "signalLoadMapper.signalEntities", target = "successRowsLoadCount",
+            qualifiedByName = "getSuccessRowsLoadCount")
     public abstract SignalLoadTriggerCO mapToCO(SignalEntityWrapper signalLoadMapper);
 
     @Named("getSuccessRowsLoadCount")

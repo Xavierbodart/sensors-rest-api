@@ -56,7 +56,8 @@ public class SignalFileReaderService {
                 }
                 lineNumber++;
 
-            } while (currentSignal != null);
+            }
+            while (currentSignal != null);
         } finally {
             itemReader.close();
         }
@@ -68,9 +69,12 @@ public class SignalFileReaderService {
         final DefaultLineMapper<SignalEntity> lineMapper = new DefaultLineMapper<>();
         tokenizer.setNames(COLUMN_NAME_NODE_ID, COLUMN_NAME_SAMPLING_INTERVAL_MS, COLUMN_NAME_DEADBAND_VALUE,
                 COLUMN_NAME_DEADBAND_TYPE, COLUMN_NAME_ACTIVE, COLUMN_NAME_KEYWORDS);
-        lineMapper.setLineTokenizer(tokenizer); lineMapper.setFieldSetMapper(new SignalFieldSetMapper());
-        itemReader.setResource(new FileSystemResource(signalFilePath)); itemReader.setLineMapper(lineMapper);
-        itemReader.setLinesToSkip(1); itemReader.open(new ExecutionContext());
+        lineMapper.setLineTokenizer(tokenizer);
+        lineMapper.setFieldSetMapper(new SignalFieldSetMapper());
+        itemReader.setResource(new FileSystemResource(signalFilePath));
+        itemReader.setLineMapper(lineMapper);
+        itemReader.setLinesToSkip(1);
+        itemReader.open(new ExecutionContext());
     }
 
 }

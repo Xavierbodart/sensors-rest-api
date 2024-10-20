@@ -7,6 +7,7 @@ import lombok.Data;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class SignalSearchCriteriaCO {
@@ -22,6 +23,6 @@ public class SignalSearchCriteriaCO {
     private Integer deadbandValue;
     @PositiveOrZero(message = "Sampling interval must be positive")
     private Integer samplingInterval;
-    private List<@Positive(message = "Keyword ID must be positive") Integer> keywordIds;
+    private Set<@Positive(message = "Keyword ID must be positive") Integer> keywordIds;
 
 }

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface SignalRepository extends JpaRepository<SignalEntity, String> {
@@ -22,12 +23,12 @@ public interface SignalRepository extends JpaRepository<SignalEntity, String> {
                AND (:deadbandValue IS NULL OR s.deadbandValue = :deadbandValue)
                AND (:keywordIds IS NULL OR k.id IN :keywordIds)
                GROUP BY s.nodeId
-               HAVING (COALESCE(:count, 0) = 0 OR COUNT(DISTINCT k.id) >= :count)
+               HAVING (COUNT(DISTINCT k.id) >= :count)
             """)
     List<SignalEntity> findByCriteria(Pageable pageable, @Param("isActive") Boolean isActive,
                                       @Param("deadbandType") DeadbandType deadbandType,
                                       @Param("deadbandValue") Integer deadbandValue,
                                       @Param("samplingInterval") Integer samplingInterval,
-                                      @Param("keywordIds") List<Integer> keywordIds,
+                                      @Param("keywordIds") Set<Integer> keywordIds,
                                       @Param("count") Integer count);
 }

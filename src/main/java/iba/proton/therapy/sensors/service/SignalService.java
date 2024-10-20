@@ -64,7 +64,7 @@ public class SignalService {
         final List<SignalEntity> signalEntities = signalRepository.findByCriteria(pageable,
                 searchCriteria.getIsActive(), searchCriteria.getDeadbandType(), searchCriteria.getDeadbandValue(),
                 searchCriteria.getSamplingInterval(), searchCriteria.getKeywordIds(),
-                CollectionUtils.isEmpty(searchCriteria.getKeywordIds()) ? null : searchCriteria.getKeywordIds().size());
+                CollectionUtils.isEmpty(searchCriteria.getKeywordIds()) ? 0 : searchCriteria.getKeywordIds().size());
         return signalEntities.stream().map(signalMapper::mapToCO).toList();
     }
 

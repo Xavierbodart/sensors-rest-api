@@ -11,7 +11,6 @@ import java.util.List;
 @Repository
 public interface KeywordRepository extends JpaRepository<KeywordEntity, Integer> {
 
-    // Method to find keywords by node ID
     @Query("SELECT s.keywords FROM SignalEntity s WHERE s.nodeId = :nodeId")
     List<KeywordEntity> findKeywordsByNodeId(@Param("nodeId") String nodeId);
 }
